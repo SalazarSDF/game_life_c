@@ -45,7 +45,7 @@ int next_generation(char (*main_field)[WIDTH], char (*process_field)[WIDTH]) {
     int num_neighbors;
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
-            num_neighbors = neighbor_count(y, x, main_field);
+            num_neighbors = neighbor_count(x, y, main_field);
 
             if (main_field[y][x] == LIVE) {
                 if (num_neighbors < 2 || num_neighbors > 3) {

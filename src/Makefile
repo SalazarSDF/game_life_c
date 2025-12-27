@@ -16,4 +16,4 @@ graphics.o: graphics.c graphics.h
 	$(CC) $(CFLAGS) -c graphics.c
 
 clear:
-	rm -f *.o
+	rm -f *.o main

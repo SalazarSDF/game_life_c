@@ -1,0 +1,62 @@
+rm -f *.o main
+gcc -Wall -Werror -Wextra -std=c11 -D_XOPEN_SOURCE=500 -c game_of_life.c
+game_of_life.c:2: error: "_XOPEN_SOURCE" redefined [-Werror]
+    2 | #define _XOPEN_SOURCE 700
+      | 
+<command-line>: note: this is the location of the previous definition
+game_of_life.c: In function ‘disable_raw_mode’:
+game_of_life.c:16:27: error: implicit declaration of function ‘tcsetattr’ [-Werror=implicit-function-declaration]
+   16 | void disable_raw_mode() { tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios); }
+      |                           ^~~~~~~~~
+game_of_life.c:16:51: error: ‘TCSANOW’ undeclared (first use in this function)
+   16 | void disable_raw_mode() { tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios); }
+      |                                                   ^~~~~~~
+game_of_life.c:16:51: note: each undeclared identifier is reported only once for each function it appears in
+game_of_life.c: In function ‘enable_raw_mode’:
+game_of_life.c:20:5: error: implicit declaration of function ‘tcgetattr’ [-Werror=implicit-function-declaration]
+   20 |     tcgetattr(STDIN_FILENO, &orig_termios);
+      |     ^~~~~~~~~
+game_of_life.c:23:12: error: variable ‘raw’ has initializer but incomplete type
+   23 |     struct termios raw = orig_termios;
+      |            ^~~~~~~
+game_of_life.c:23:26: error: ‘orig_termios’ has an incomplete type ‘struct termios’
+   23 |     struct termios raw = orig_termios;
+      |                          ^~~~~~~~~~~~
+game_of_life.c:23:20: error: storage size of ‘raw’ isn’t known
+   23 |     struct termios raw = orig_termios;
+      |                    ^~~
+game_of_life.c:24:22: error: ‘ICANON’ undeclared (first use in this function)
+   24 |     raw.c_lflag &= ~(ICANON | ECHO);  // Отключаем буферизацию строк и эхо-вывод
+      |                      ^~~~~~
+game_of_life.c:24:31: error: ‘ECHO’ undeclared (first use in this function)
+   24 |     raw.c_lflag &= ~(ICANON | ECHO);  // Отключаем буферизацию строк и эхо-вывод
+      |                               ^~~~
+game_of_life.c:25:29: error: ‘TCSANOW’ undeclared (first use in this function)
+   25 |     tcsetattr(STDIN_FILENO, TCSANOW, &raw);
+      |                             ^~~~~~~
+game_of_life.c:28:5: error: implicit declaration of function ‘fcntl’ [-Werror=implicit-function-declaration]
+   28 |     fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) | O_NONBLOCK);
+      |     ^~~~~
+game_of_life.c:28:25: error: ‘F_SETFL’ undeclared (first use in this function)
+   28 |     fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) | O_NONBLOCK);
+      |                         ^~~~~~~
+game_of_life.c:28:54: error: ‘F_GETFL’ undeclared (first use in this function)
+   28 |     fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) | O_NONBLOCK);
+      |                                                      ^~~~~~~
+game_of_life.c:28:68: error: ‘O_NONBLOCK’ undeclared (first use in this function)
+   28 |     fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) | O_NONBLOCK);
+      |                                                                    ^~~~~~~~~~
+game_of_life.c:23:20: error: unused variable ‘raw’ [-Werror=unused-variable]
+   23 |     struct termios raw = orig_termios;
+      |                    ^~~
+game_of_life.c: In function ‘main’:
+game_of_life.c:65:9: error: implicit declaration of function ‘usleep’; did you mean ‘sleep’? [-Werror=implicit-function-declaration]
+   65 |         usleep(speed);
+      |         ^~~~~~
+      |         sleep
+game_of_life.c: At top level:
+game_of_life.c:13:16: error: storage size of ‘orig_termios’ isn’t known
+   13 | struct termios orig_termios;
+      |                ^~~~~~~~~~~~
+cc1: all warnings being treated as errors
+make: *** [Makefile:10: game_of_life.o] Error 1
