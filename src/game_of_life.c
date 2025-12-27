@@ -36,6 +36,7 @@ int main(void) {
         create_field(main_field);
 
         // Выводим статус скорости внизу (за пределами игрового поля)
+        mvprintw(HEIGHT + 1, 0, "SPEED: %f ms (Z- faster, A- slower, Space- quit)", speed);
         refresh();  // Выводим изменения на физический экран
 
         // 4. Управление скоростью и ввод
